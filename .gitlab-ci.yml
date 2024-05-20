@@ -1,0 +1,18 @@
+stages:
+  - test
+  - deploy
+test app:
+  stage: test
+  image: node:latest
+  script:
+  - npm --version
+  - npm install
+  - npm run test
+deploy app:
+  stage: deploy
+  image: node:latest
+  script:
+    - npm install
+    - npm run build
+    - npm install -g netlify-cli
+    - netlify deploy --dir=build --prod
